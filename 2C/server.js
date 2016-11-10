@@ -17,7 +17,6 @@ app.get('/', function(req, res) {
     output = output.path
     var services = ['telegram.me', 'vk.com']
     services.forEach((service) => {
-        console.log(`replace ${service} by ''`)
         output = output.replace(service, '')
     })
     output = output.split('/');
