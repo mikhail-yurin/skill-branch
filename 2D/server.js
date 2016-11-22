@@ -22,7 +22,12 @@ app.get('/', function (req, res) {
                 }
             } else if (/(hsl\(.*\)){1}/.test(inputColor)) {
                 console.log('hsl');
-                out = '#' + tinycolor(inputColor.replace(/\%20/g, '').replace('#', '')).toHex();
+                var tcolor = tinycolor(inputColor.replace(/\%20/g, ' ').replace('#', '').trim());
+                console.log(`\t>> '${tcolor._originalInput}'`);
+                // console.log(tcolor);
+                if (!/101\%/g.test(tcolor._originalInput) && /hsl\(\d+\,\s\d+\%\,\s\d+\%\)/g.test(tcolor._originalInput)) {
+                    out = '#' + tinycolor(tcolor).toHex();
+                }
             } else {
                 if (/[^0-9a-fA-F\#]+/g.test(inputColor)) {
                     out = 'Invalid color';
